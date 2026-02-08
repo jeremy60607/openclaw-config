@@ -8,8 +8,8 @@ Reproducible configuration for local OpenClaw installation.
 # 1. Install Node >= 22
 brew install node
 
-# 2. Copy env.example to .env and fill in API keys
-cp env.example .env
+# 2. Copy .env.example to .env and fill in API keys
+cp .env.example .env
 # edit .env with your keys
 
 # 3. Run setup
@@ -23,7 +23,7 @@ chmod +x scripts/*.sh
 .
 ├── README.md                     # This file
 ├── openclaw.template.json        # Config template (no secrets)
-├── env.example                   # Environment variables template
+├── .env.example                  # Environment variables template
 ├── scripts/
 │   ├── setup.sh                  # Fresh install script
 │   ├── apply.sh                  # Apply template to live config (GitOps core)

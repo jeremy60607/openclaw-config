@@ -21,7 +21,7 @@ Edit template → git commit → ./scripts/apply.sh → verify → done
 
 - Secrets (API keys, tokens) are NEVER stored in git
 - They live in `~/.openclaw/openclaw.json` (injected by onboard wizard) or env vars
-- `env.example` documents which env vars are needed — copy to `.env` for local use
+- `.env.example` documents which env vars are needed — copy to `.env` for local use
 - `apply.sh` automatically preserves secrets from the live config during merge
 - The template uses `_*_comment` fields as placeholders for secret fields
 
@@ -30,7 +30,7 @@ Edit template → git commit → ./scripts/apply.sh → verify → done
 | Path | What | In Git? |
 |------|------|---------|
 | `openclaw.template.json` | Config source of truth | Yes |
-| `env.example` | Env var documentation | Yes |
+| `.env.example` | Env var documentation | Yes |
 | `~/.openclaw/openclaw.json` | Live config (has secrets) | No |
 | `~/.openclaw/skills/` | Installed skills | No |
 | `~/.openclaw/logs/` | Gateway logs | No |
@@ -91,7 +91,7 @@ Edit template → git commit → ./scripts/apply.sh → verify → done
 
 ### Transferring to a new machine
 1. Clone this repo on the new machine
-2. Copy `env.example` to `.env`, fill in API keys
+2. Copy `.env.example` to `.env`, fill in API keys
 3. Run `./scripts/setup.sh` (installs OpenClaw, runs onboard wizard)
 4. Run `./scripts/apply.sh` (applies all template settings)
 5. Re-install skills listed in `skills/skills-list.md`

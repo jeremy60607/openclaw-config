@@ -49,7 +49,7 @@ elif [ -f "$PROJECT_DIR/env.local" ]; then
   set +a
 else
   echo "  WARNING: No .env file found."
-  echo "  Copy env.example to .env and fill in your API keys before running this script."
+  echo "  Copy .env.example to .env and fill in your API keys before running this script."
   echo ""
   read -p "  Continue without .env? (y/N) " -n 1 -r
   echo
