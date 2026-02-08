@@ -26,6 +26,7 @@ chmod +x scripts/*.sh
 ├── env.example                   # Environment variables template
 ├── scripts/
 │   ├── setup.sh                  # Fresh install script
+│   ├── apply.sh                  # Apply template to live config (GitOps core)
 │   ├── clean.sh                  # Clean uninstall script
 │   └── backup.sh                 # Backup current config (redacts secrets)
 ├── skills/
@@ -37,7 +38,25 @@ chmod +x scripts/*.sh
 └── backups/                      # Auto-created by backup.sh
 ```
 
+## GitOps Workflow
+
+All config changes follow: **edit template -> commit -> apply -> verify**
+
+```bash
+# 1. Edit openclaw.template.json
+# 2. Commit the change
+# 3. Apply to live config (preserves secrets)
+./scripts/apply.sh
+# 4. Verify
+openclaw security audit
+```
+
 ## Workflows
+
+### Apply Config Changes
+```bash
+./scripts/apply.sh
+```
 
 ### Backup Current Setup
 ```bash
@@ -56,6 +75,7 @@ chmod +x scripts/*.sh
 
 ### Update OpenClaw
 ```bash
+./scripts/backup.sh
 npm install -g openclaw@latest
 openclaw doctor
 ```
