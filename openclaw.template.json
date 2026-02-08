@@ -1,43 +1,44 @@
 {
   "$schema": "https://docs.openclaw.ai/schema/openclaw.json",
   "_comment": "OpenClaw config template. Secrets (tokens, API keys) should use env vars, not this file.",
-
   "commands": {
     "native": "auto",
     "nativeSkills": "auto"
   },
-
   "hooks": {
     "internal": {
       "enabled": true,
       "entries": {
-        "boot-md": { "enabled": true },
-        "command-logger": { "enabled": true },
-        "session-memory": { "enabled": true }
+        "boot-md": {
+          "enabled": true
+        },
+        "command-logger": {
+          "enabled": true
+        },
+        "session-memory": {
+          "enabled": true
+        }
       }
     }
   },
-
   "web": {
     "enabled": true
   },
-
   "skills": {
     "install": {
       "nodeManager": "npm"
     }
   },
-
   "tools": {
     "agentToAgent": {
-      "allow": [""]
+      "allow": [
+        ""
+      ]
     }
   },
-
   "messages": {
     "ackReactionScope": "group-mentions"
   },
-
   "agents": {
     "defaults": {
       "maxConcurrent": 4,
@@ -47,17 +48,17 @@
       "compaction": {
         "mode": "safeguard"
       },
-      "model": {
-        "primary": "zai/glm-4.7"
-      },
+      "workspace": "/Users/agent/.openclaw/workspace",
       "models": {
         "zai/glm-4.7": {
           "alias": "GLM"
         }
+      },
+      "model": {
+        "primary": "zai/glm-4.7"
       }
     }
   },
-
   "gateway": {
     "mode": "local",
     "auth": {
@@ -67,10 +68,10 @@
     "port": 18789,
     "bind": "loopback",
     "tailscale": {
-      "mode": "off"
+      "mode": "off",
+      "resetOnExit": false
     }
   },
-
   "auth": {
     "profiles": {
       "zai:default": {
@@ -79,7 +80,6 @@
       }
     }
   },
-
   "plugins": {
     "entries": {
       "telegram": {
@@ -87,7 +87,6 @@
       }
     }
   },
-
   "channels": {
     "telegram": {
       "enabled": true,

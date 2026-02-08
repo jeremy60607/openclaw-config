@@ -119,12 +119,23 @@ try {
 let listedSkills = [];
 try {
   const content = fs.readFileSync('$SKILLS_LIST', 'utf8');
-  const matches = content.matchAll(/^\| ([\w][\w.-]*) \|/gm);
+  // Only match skills installed to ~/.openclaw/skills (table rows containing the skills dir path)
+  // This excludes npm global skills (clawhub, mcporter, etc.)
+  const matches = content.matchAll(/^\| ([\w][\w.-]*) \|[^|]*\|/gm);
   const skills = new Set();
   for (const m of matches) {
     if (m[1] !== 'Skill') skills.add(m[1]);
   }
-  listedSkills = [...skills];
+  // Filter: only keep skills whose table row references the skills dir
+  const lines = content.split('\\n');
+  const localSkills = new Set();
+  for (const line of lines) {
+    const rowMatch = line.match(/^\| ([\w][\w.-]*) \|/);
+    if (rowMatch && rowMatch[1] !== 'Skill' && line.includes('.openclaw/skills')) {
+      localSkills.add(rowMatch[1]);
+    }
+  }
+  listedSkills = [...localSkills];
 } catch (e) {}
 
 for (const skill of installedSkills) {

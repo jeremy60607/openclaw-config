@@ -185,11 +185,14 @@ if [ -d "$SKILLS_DIR" ]; then
     done < <(node -e "
       const fs = require('fs');
       const content = fs.readFileSync('$SKILLS_LIST', 'utf8');
-      // Extract skill names from table rows (| name | ... | ... |)
-      const matches = content.matchAll(/^\| ([\w][\w.-]*) \|/gm);
+      // Only match skills installed to ~/.openclaw/skills (not npm global ones)
+      const lines = content.split('\\n');
       const skills = new Set();
-      for (const m of matches) {
-        if (m[1] !== 'Skill') skills.add(m[1]); // skip header
+      for (const line of lines) {
+        const m = line.match(/^\| ([\w][\w.-]*) \|/);
+        if (m && m[1] !== 'Skill' && line.includes('.openclaw/skills')) {
+          skills.add(m[1]);
+        }
       }
       for (const s of skills) console.log(s);
     ")

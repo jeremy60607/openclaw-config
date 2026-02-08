@@ -2,12 +2,21 @@
 
 > Run `openclaw security audit --deep` after setup to verify.
 
+## macOS Device Security
+
+- [x] FileVault (full disk encryption) enabled
+- [ ] Find My Mac enabled (verify in System Settings → Apple ID → iCloud → Find My Mac)
+- [x] Screen lock enabled (300s delay — consider reducing to 60s or less)
+- [ ] macOS Firewall enabled (System Settings → Network → Firewall)
+- [ ] Firmware password set (Intel Macs) or Activation Lock enabled (Apple Silicon)
+- [ ] Automatic macOS updates enabled
+
 ## Initial Setup
 
-- [ ] Gateway binds to `loopback` (127.0.0.1), not 0.0.0.0
-- [ ] Gateway auth mode set to `token`
+- [x] Gateway binds to `loopback` (127.0.0.1), not 0.0.0.0
+- [x] Gateway auth mode set to `token`
 - [ ] API keys stored in env vars, NOT in openclaw.json
-- [ ] File permissions: `chmod 700 ~/.openclaw && chmod 600 ~/.openclaw/openclaw.json`
+- [x] File permissions: `chmod 700 ~/.openclaw && chmod 600 ~/.openclaw/openclaw.json`
 - [ ] Never run as root; use dedicated user account
 
 ## DM & Channel Security
@@ -39,9 +48,10 @@
 
 ## Monitoring & Maintenance
 
-- [ ] Command logger hook enabled
+- [x] Command logger hook enabled
 - [ ] Logs reviewed periodically (`~/.openclaw/logs/`)
-- [ ] `openclaw security audit` run monthly
+- [x] `openclaw security audit` run monthly
+- [x] Config drift detection cron job (every 6h via `detect-drift.sh`)
 - [ ] `npm audit` run on openclaw dependencies
 - [ ] OpenClaw updated to latest stable version
 
