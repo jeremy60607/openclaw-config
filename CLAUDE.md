@@ -6,7 +6,8 @@ All configuration changes flow through version-controlled templates, never direc
 ## GitOps Workflow (MUST follow)
 
 ```
-Edit template → git commit → ./scripts/apply.sh → verify → done
+Forward:  Edit template → git commit → ./scripts/apply.sh → verify → done
+Reverse:  ./scripts/sync.sh → review git diff → git commit → done
 ```
 
 1. **Modify** `openclaw.template.json` (the single source of truth for non-secret config)
@@ -43,6 +44,8 @@ Edit template → git commit → ./scripts/apply.sh → verify → done
 | `scripts/setup.sh` | Fresh install on new machine | First time only |
 | `scripts/apply.sh` | Apply template to live config | After every template change |
 | `scripts/backup.sh` | Backup live config (secrets redacted) | Before risky changes |
+| `scripts/sync.sh` | Sync live config back to template | After changes made outside repo (e.g. Telegram) |
+| `scripts/detect-drift.sh` | Compare live vs template, output JSON diff | Cron job or manual check |
 | `scripts/clean.sh` | Complete uninstall | When removing OpenClaw |
 
 ## Common Tasks for Claude
@@ -88,6 +91,17 @@ Edit template → git commit → ./scripts/apply.sh → verify → done
 3. Document the channel setup in `mcp/mcp-config.md` or a new doc
 4. Run `./scripts/apply.sh`
 5. Commit
+
+### Syncing live config to repo (reverse sync)
+1. Run `./scripts/sync.sh --dry-run` to preview changes
+2. Run `./scripts/sync.sh` to apply
+3. Review `git diff` — ensure no secrets leaked
+4. Commit the template/skills-list changes
+
+### Checking for config drift
+1. Run `./scripts/detect-drift.sh`
+2. If exit code 1 (drift detected), review the JSON output
+3. Decide whether to sync (`./scripts/sync.sh`) or revert (`./scripts/apply.sh`)
 
 ### Transferring to a new machine
 1. Clone this repo on the new machine

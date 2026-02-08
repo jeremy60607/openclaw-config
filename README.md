@@ -28,6 +28,8 @@ chmod +x scripts/*.sh
 │   ├── setup.sh                  # Fresh install script
 │   ├── apply.sh                  # Apply template to live config (GitOps core)
 │   ├── clean.sh                  # Clean uninstall script
+│   ├── sync.sh                   # Reverse sync: live config → template
+│   ├── detect-drift.sh           # Compare live config vs template (JSON report)
 │   └── backup.sh                 # Backup current config (redacts secrets)
 ├── skills/
 │   └── skills-list.md            # Installed skills registry
@@ -53,9 +55,29 @@ openclaw security audit
 
 ## Workflows
 
-### Apply Config Changes
+### Apply Config Changes (Forward: repo → live)
 ```bash
 ./scripts/apply.sh
+```
+
+### Reverse Sync (Live → repo)
+When config changes are made outside the repo (e.g. via Telegram, `openclaw onboard`, or manual edits):
+```bash
+# Preview what would change
+./scripts/sync.sh --dry-run
+
+# Apply reverse sync (updates template + skills list)
+./scripts/sync.sh
+
+# Review and commit
+git diff
+git commit -m "chore: sync live config changes to template"
+```
+
+### Detect Config Drift
+```bash
+# Returns JSON report, exit 0 = no drift, exit 1 = drift
+./scripts/detect-drift.sh
 ```
 
 ### Backup Current Setup

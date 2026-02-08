@@ -33,6 +33,7 @@ if [ -f "$OPENCLAW_HOME/openclaw.json" ] && command -v node &>/dev/null; then
 
     // Redact secrets
     if (cfg.gateway?.auth?.token) cfg.gateway.auth.token = '<REDACTED>';
+    if (cfg.channels?.telegram?.botToken) cfg.channels.telegram.botToken = '<REDACTED>';
     if (cfg.auth?.profiles) {
       for (const key of Object.keys(cfg.auth.profiles)) {
         const p = cfg.auth.profiles[key];

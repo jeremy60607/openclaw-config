@@ -5,7 +5,18 @@
 
 ## Currently Installed
 
-_None yet - fresh install._
+### Core (npm global)
+| Skill | Install Command | Purpose |
+|-------|----------------|---------|
+| clawhub | `npm i -g clawhub` | Skill marketplace — search, install, update skills |
+| mcporter | `npm i -g mcporter` | MCP server management — list, configure, call MCP tools |
+
+### Smart Home (ClawHub)
+| Skill | Install Command | Purpose |
+|-------|----------------|---------|
+| homekit | `clawhub install homekit --dir ~/.openclaw/skills` | Control Apple HomeKit devices (lights, switches, outlets, thermostats) |
+
+> Python deps for homekit: `pip3 install "HAP-python[QRCode]" aiohomekit`
 
 ## Recommended Skills to Install
 
