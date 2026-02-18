@@ -5,22 +5,37 @@
 
 ## Currently Configured
 
-_None yet - fresh install._
+### Apple Shortcuts (run macOS Shortcuts)
+- **Repo**: https://github.com/recursechat/mcp-server-apple-shortcuts
+- **Stars**: 301 | **License**: Apache-2.0
+- **Tools**: list shortcuts, run shortcut by name (with optional input)
+- **Use case**: Execute pre-built HomeKit shortcuts to control smart home devices without creating a separate HomeKit pairing
+```json
+"apple-shortcuts": {
+  "command": "npx",
+  "args": ["-y", "mcp-server-apple-shortcuts"]
+}
+```
 
 ## Configuration Format
 
-In `~/.openclaw/openclaw.json`:
+MCP servers are managed by `mcporter`, NOT in `openclaw.json` directly.
 
-```json
-{
-  "mcpServers": {
-    "<server-name>": {
-      "command": "npx",
-      "args": ["-y", "@scope/mcp-server-package"]
-    }
-  }
-}
+```bash
+# Add a stdio MCP server
+mcporter config add <name> --command "npx" --arg "-y" --arg "<package>" --scope home
+
+# List configured servers
+mcporter list [--schema]
+
+# Call a tool
+mcporter call <server>.<tool>(key: "value")
+
+# Remove a server
+mcporter config remove <name>
 ```
+
+Config file: `~/.mcporter/mcporter.json` (home scope) or `<project>/config/mcporter.json` (project scope)
 
 ## Recommended MCP Servers
 

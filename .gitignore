@@ -14,5 +14,8 @@ Thumbs.db
 # Backups (may contain sanitized but sensitive info)
 backups/
 
+# Ephemeral session prompts
+docs/session-prompt.md
+
 # Node
 node_modules/
