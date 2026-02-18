@@ -48,16 +48,50 @@
       "compaction": {
         "mode": "safeguard"
       },
-      "workspace": "/Users/agent/.openclaw/workspace",
       "models": {
         "zai/glm-4.7": {
           "alias": "GLM"
+        },
+        "zai/glm-4-flash": {
+          "alias": "GLM-Flash"
         }
       },
       "model": {
         "primary": "zai/glm-4.7"
       }
-    }
+    },
+    "list": [
+      {
+        "id": "daily",
+        "default": true,
+        "workspace": "~/.openclaw/workspace-daily",
+        "model": "zai/glm-4.7",
+        "tools": {
+          "profile": "full"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "home",
+        "workspace": "~/.openclaw/workspace-home",
+        "model": "zai/glm-4-flash",
+        "identity": {
+          "name": "HomeBot",
+          "theme": "smart home controller"
+        },
+        "tools": {
+          "profile": "messaging",
+          "allow": ["shortcuts"],
+          "deny": ["group:fs", "group:runtime", "browser", "group:web"]
+        },
+        "sandbox": {
+          "mode": "all",
+          "scope": "agent"
+        }
+      }
+    ]
   },
   "gateway": {
     "mode": "local",
@@ -90,7 +124,31 @@
   "channels": {
     "telegram": {
       "enabled": true,
-      "_botToken_comment": "Set via OPENCLAW_TELEGRAM_BOT_TOKEN env var or paste during onboard wizard"
+      "accounts": {
+        "default": {
+          "_botToken_comment": "Set via OPENCLAW_TELEGRAM_BOT_TOKEN env var or paste during onboard wizard"
+        },
+        "homebot": {
+          "_botToken_comment": "Set via TELEGRAM_BOT_TOKEN_HOME env var",
+          "dmPolicy": "pairing"
+        }
+      }
     }
-  }
+  },
+  "bindings": [
+    {
+      "agentId": "daily",
+      "match": {
+        "channel": "telegram",
+        "accountId": "default"
+      }
+    },
+    {
+      "agentId": "home",
+      "match": {
+        "channel": "telegram",
+        "accountId": "homebot"
+      }
+    }
+  ]
 }
