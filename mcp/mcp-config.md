@@ -10,6 +10,8 @@
 - **Stars**: 301 | **License**: Apache-2.0
 - **Tools**: list shortcuts, run shortcut by name (with optional input)
 - **Use case**: Execute pre-built HomeKit shortcuts to control smart home devices without creating a separate HomeKit pairing
+- **Used by**: `home` agent (smart home controller)
+- **Agent access**: The home agent's tool allowlist includes `shortcuts`
 ```json
 "apple-shortcuts": {
   "command": "npx",
