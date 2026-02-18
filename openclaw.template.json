@@ -83,8 +83,7 @@
         },
         "tools": {
           "profile": "full",
-          "alsoAllow": ["list_shortcuts", "run_shortcut"],
-          "deny": ["group:fs", "group:runtime", "browser", "group:web"]
+          "deny": ["group:fs", "bash", "process", "browser", "group:web"]
         },
         "sandbox": {
           "mode": "off"
