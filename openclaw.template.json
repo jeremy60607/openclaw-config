@@ -52,7 +52,7 @@
         "zai/glm-4.7": {
           "alias": "GLM"
         },
-        "zai/glm-4-flash": {
+        "zai/glm-4.7-flash": {
           "alias": "GLM-Flash"
         }
       },
@@ -76,7 +76,7 @@
       {
         "id": "home",
         "workspace": "~/.openclaw/workspace-home",
-        "model": "zai/glm-4.7",
+        "model": "zai/glm-4.7-flash",
         "identity": {
           "name": "HomeBot",
           "theme": "smart home controller"
