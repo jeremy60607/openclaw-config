@@ -53,11 +53,22 @@ const template = JSON.parse(fs.readFileSync('$TEMPLATE', 'utf8'));
 // Extract secrets from live config to preserve
 const secrets = {
   gatewayToken: live.gateway?.auth?.token,
+  // Support both single-account and multi-account telegram
   telegramBotToken: live.channels?.telegram?.botToken,
+  telegramAccounts: {},
   authProfiles: live.auth?.profiles,
   meta: live.meta,
   wizard: live.wizard,
 };
+
+// Extract per-account telegram tokens
+if (live.channels?.telegram?.accounts) {
+  for (const [name, acct] of Object.entries(live.channels.telegram.accounts)) {
+    if (acct.botToken) {
+      secrets.telegramAccounts[name] = acct.botToken;
+    }
+  }
+}
 
 // Deep merge: template values override, but we keep live-only keys
 function deepMerge(target, source) {
@@ -88,10 +99,17 @@ if (secrets.gatewayToken) {
   merged.gateway.auth = merged.gateway.auth || {};
   merged.gateway.auth.token = secrets.gatewayToken;
 }
+// Restore single-account telegram token (legacy)
 if (secrets.telegramBotToken) {
   merged.channels = merged.channels || {};
   merged.channels.telegram = merged.channels.telegram || {};
   merged.channels.telegram.botToken = secrets.telegramBotToken;
+}
+// Restore multi-account telegram tokens
+for (const [name, token] of Object.entries(secrets.telegramAccounts)) {
+  if (merged.channels?.telegram?.accounts?.[name]) {
+    merged.channels.telegram.accounts[name].botToken = token;
+  }
 }
 if (secrets.authProfiles) {
   merged.auth = merged.auth || {};
