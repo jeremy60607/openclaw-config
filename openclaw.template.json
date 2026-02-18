@@ -83,7 +83,7 @@
         },
         "tools": {
           "profile": "messaging",
-          "allow": ["shortcuts"],
+          "alsoAllow": ["apple-shortcuts"],
           "deny": ["group:fs", "group:runtime", "browser", "group:web"]
         },
         "sandbox": {
