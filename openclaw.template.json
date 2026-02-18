@@ -87,8 +87,7 @@
           "deny": ["group:fs", "group:runtime", "browser", "group:web"]
         },
         "sandbox": {
-          "mode": "all",
-          "scope": "agent"
+          "mode": "off"
         }
       }
     ]
