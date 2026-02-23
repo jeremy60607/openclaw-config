@@ -34,6 +34,12 @@
       "allow": [
         ""
       ]
+    },
+    "elevated": {
+      "enabled": true,
+      "allowFrom": {
+        "telegram": ["*"]
+      }
     }
   },
   "messages": {
@@ -83,7 +89,12 @@
         },
         "tools": {
           "profile": "full",
-          "deny": ["group:fs", "bash", "process", "browser", "group:web"]
+          "deny": ["group:fs", "bash", "process", "browser", "group:web"],
+          "sandbox": {
+            "tools": {
+              "allow": ["nodes"]
+            }
+          }
         },
         "sandbox": {
           "mode": "off"
@@ -99,7 +110,12 @@
         },
         "tools": {
           "profile": "full",
-          "deny": ["group:fs", "bash", "process", "browser"]
+          "deny": ["group:fs", "bash", "process", "browser"],
+          "sandbox": {
+            "tools": {
+              "allow": ["nodes"]
+            }
+          }
         },
         "sandbox": {
           "mode": "off"
