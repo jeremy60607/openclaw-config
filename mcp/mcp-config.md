@@ -19,6 +19,57 @@
 }
 ```
 
+### Brave Search (web/news search)
+- **Package**: `@modelcontextprotocol/server-brave-search`
+- **Tools**: `brave_web_search`, `brave_local_search`
+- **API Key**: `BRAVE_API_KEY` (free 2000 queries/mo — https://brave.com/search/api/)
+- **Used by**: `crypto` agent (news collection)
+```json
+"brave-search": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+  "env": { "BRAVE_API_KEY": "<key>" }
+}
+```
+
+### Firecrawl (web scraping)
+- **Package**: `firecrawl-mcp`
+- **Tools**: `firecrawl_scrape`, `firecrawl_search`, `firecrawl_map`, `firecrawl_crawl`, + 8 more
+- **API Key**: `FIRECRAWL_API_KEY` (free 500 credits/mo — https://firecrawl.dev)
+- **Used by**: `crypto` agent (deep article reading)
+```json
+"firecrawl": {
+  "command": "npx",
+  "args": ["-y", "firecrawl-mcp"],
+  "env": { "FIRECRAWL_API_KEY": "<key>" }
+}
+```
+
+### RSS Reader (RSS/Atom feeds)
+- **Package**: `rss-reader-mcp`
+- **Tools**: `fetch_feed_entries`, `fetch_article_content`
+- **API Key**: None
+- **Used by**: `crypto` agent (daily news feeds)
+```json
+"rss": {
+  "command": "npx",
+  "args": ["-y", "rss-reader-mcp"]
+}
+```
+
+### Gemini Image Generation
+- **Package**: `mcp-image`
+- **Tools**: `generate_image`
+- **API Key**: `GEMINI_API_KEY` (free tier — https://aistudio.google.com)
+- **Used by**: `crypto` agent (IG image generation)
+```json
+"mcp-image": {
+  "command": "npx",
+  "args": ["-y", "mcp-image"],
+  "env": { "GEMINI_API_KEY": "<key>" }
+}
+```
+
 ## Configuration Format
 
 MCP servers are managed by `mcporter`, NOT in `openclaw.json` directly.

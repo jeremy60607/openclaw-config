@@ -88,6 +88,22 @@
         "sandbox": {
           "mode": "off"
         }
+      },
+      {
+        "id": "crypto",
+        "workspace": "~/.openclaw/workspace-crypto",
+        "model": "zai/glm-4.7",
+        "identity": {
+          "name": "CryptoBot",
+          "theme": "crypto content factory"
+        },
+        "tools": {
+          "profile": "full",
+          "deny": ["group:fs", "bash", "process", "browser"]
+        },
+        "sandbox": {
+          "mode": "off"
+        }
       }
     ]
   },
@@ -129,6 +145,10 @@
         "homebot": {
           "_botToken_comment": "Set via TELEGRAM_BOT_TOKEN_HOME env var",
           "dmPolicy": "pairing"
+        },
+        "cryptobot": {
+          "_botToken_comment": "Set via TELEGRAM_BOT_TOKEN_CRYPTO env var",
+          "dmPolicy": "pairing"
         }
       }
     }
@@ -146,6 +166,13 @@
       "match": {
         "channel": "telegram",
         "accountId": "homebot"
+      }
+    },
+    {
+      "agentId": "crypto",
+      "match": {
+        "channel": "telegram",
+        "accountId": "cryptobot"
       }
     }
   ]
